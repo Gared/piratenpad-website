@@ -8,7 +8,7 @@
 
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
   /* jQuery awesome scroll */
@@ -20,15 +20,21 @@ $(function() {
     document.location = '#'+anchor;
     evt.preventDefault();
   })
+  $('a[href=""]').click(function(evt) {
+    evt.preventDefault();
+  });
   /*$('li a').click(function(evt) {
 	$('li a').css('background-color', '');
     $(this).css('background-color', 'green');
     $(this).toggleClass('');
   })*/
-  setInterval(function() {
-      $('a.support-mail').animate( { color: '#FF8800' }, 300).animate( { color: 'green' }, 300);
-  	}, 1000);
-  //$('a.support-mail').animate({color:'green'},1000);
+  $('.faq-headline').click(function(evt) {
+     //$(this).next('p').toggleClass('hidden', 5000);
+     /*$(this).next('.faq-text').toggle('slow', function() {
+       $(this).toggleClass('hidden');
+     });*/
+	 $(this).next('.faq-text').slideToggle("slow");
+  });
 })
 
 </script>
@@ -61,7 +67,7 @@ $(function() {
 		<div class="centered chapter">
 			<h1 style="">Home</h1>
 				<p>Etherpad ist eine Software, um Text via Browser gemeinsam zu bearbeiten. Etherpad arbeitet live. Das heißt, jeder kann sofort die Änderungen des anderen am Text sehen.</p>
-				<p>Anleitung: <a href="#">PDF</a> (<a href="http://wiki.piratenpartei.de/Piratenpad/Handbuch">Wiki</a>)</p><br>
+				<p>Anleitung: <a href="#">PDF</a> (<a href="http://wiki.piratenpartei.de/Piratenpad/Handbuch" target="_blank">Wiki</a>)</p><br>
 				<div id="button-panel">
 					<a href="#" onclick="">
 						<div class="button">Neues Pad</div>
@@ -74,74 +80,98 @@ $(function() {
 
 		<a class="scroll-target" name="faq"></a>
 		<div class="centered chapter">
-			<h1><i class="icon-wrench"></i> FAQ</h1>
-<h3>Was kann ich machen wenn mein Pad nicht mehr lädt?</h3>
-<p>Das ist ein Fehler in der Software von "Etherpad Lite" der noch nicht behoben werden konnte. Sollte das Pad nicht mehr laden, kann der Text über den Zusatz "/export/html" am Link exportiert werden (z. B. http://piratenpad.de/p/padname/export/html). Das funktioniert nur bei öffentlichen Pads!</p>
+			<h1>FAQ</h1>
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Was kann man damit machen?</a>
+			</h3>
+			<div class="faq-text">
+				Man kann Etherpad eigentlich immer brauchen, wenn man einen Text schreiben muss, aber einem selbst die Worte fehlen. Wenn der Text gemeinsam bearbeitet, wird kann jeder eigene Teile hinzufügen und den anderen korrigieren. So entsteht qualitativer Text. Und es macht auch viel mehr Spaß, den Text gemeinsam zu bearbeiten.
+			</div>
  
-<h3>Was kann man damit machen?</h3>
-<p>Man kann Etherpad eigentlich immer brauchen, wenn man einen Text schreiben muss, aber einem selbst die Worte fehlen. Wenn der Text gemeinsam bearbeitet, wird kann jeder eigene Teile hinzufügen und den anderen korrigieren. So entsteht qualitativer Text. Und es macht auch viel mehr Spaß, den Text gemeinsam zu bearbeiten.</p>
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Anwendungsbeispiele</a>
+			</h3>
+			<div class="faq-text">
+				<ul>
+					<li>E-Mail/Brief</li>
+					<li>Protokolle (Jeder kann live ergänzen, was ihm fehlt und kann sehen, was dokumentiert wird)</li>
+					<li>Pressemitteilungen</li>
+					<li>Ideenfindungen (Organisation von Parteitagen usw.)</li>
+				</ul>
+			</div>
+
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Wie verwende ich Etherpad?</a>
+			</h3>
+			<div class="faq-text">
+				Du kannst, wenn du auf „neues Pad“ gehst, einen neuen öffentlichen Pad erstellen. Schicke nun den Personen, mit denen du das Pad bearbeiten willst, den Link zu diesem Pad, damit sie darauf zugreifen können. Jedoch hat jeder, der diesen Link besitzt, auch volle Schreibrechte an diesem Pad.<br>
+				Wenn du Etherpad regelmäßig verwendest, empfiehlt es sich, eine Team-Seite anzulegen. Das machst du mit der Schaltfläche „neues Team“. Die Teamseite erreichst du dann über eine Subdomain deiner Wahl. Nur Leute, die du persönlich per Mail eingeladen hast, haben Zugriff auf die Pads in der Team-Seite. Zudem kann man hier Pads mit Passwort schützen.
+			</div>
  
-<h3>Anwendungsbeispiele</h3>
-<ul>
-    <li>E-Mail/Brief</li>
-    <li>Protokolle (Jeder kann live ergänzen, was ihm fehlt und kann sehen, was dokumentiert wird)</li>
-    <li>Pressemitteilungen</li>
-    <li>Ideenfindungen (Organisation von Parteitagen usw.)</li>
-</ul>
-<h3>Wie verwende ich Etherpad?</h3>
-<p>Du kannst, wenn du auf „neues Pad“ gehst, einen neuen öffentlichen Pad erstellen. Schicke nun den Personen, mit denen du das Pad bearbeiten willst, den Link zu diesem Pad, damit sie darauf zugreifen können. Jedoch hat jeder, der diesen Link besitzt, auch volle Schreibrechte an diesem Pad.<br>
-Wenn du Etherpad regelmäßig verwendest, empfiehlt es sich, eine Team-Seite anzulegen. Das machst du mit der Schaltfläche „neues Team“. Die Teamseite erreichst du dann über eine Subdomain deiner Wahl. Nur Leute, die du persönlich per Mail eingeladen hast, haben Zugriff auf die Pads in der Team-Seite. Zudem kann man hier Pads mit Passwort schützen.</p>
- 
-<h3>Wie erzeuge ich Read-Only Links zu Pads?</h3>
-<p>Um einen nur-lese Link zu einem Pad zu erstellen musst du folgendes machen
-<ul>
-    <li>Gehe auf "Time Slider"</li>
-    <li>dann auf "Link to read-only page"</li>
-    <li>zuletzt noch auf "Viewing latest content"</li>
-</ul>
-Diesen Link kannst du nun unbedenklich weitergeben. Die Ansicht wird automatisch aktualisiert sobald es Änderungen am Pad gibt</p>
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Wie erzeuge ich Read-Only Links zu Pads?</a>
+			</h3>
+			<div class="faq-text">
+				Um einen nur-lese Link zu einem Pad zu erstellen musst du folgendes machen
+				<ul>
+					<li>Gehe auf "Time Slider"</li>
+					<li>dann auf "Link to read-only page"</li>
+					<li>zuletzt noch auf "Viewing latest content"</li>
+				</ul>
+				Diesen Link kannst du nun unbedenklich weitergeben. Die Ansicht wird automatisch aktualisiert sobald es Änderungen am Pad gibt
+			</div>
+			
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Was kann ich machen wenn mein Pad nicht mehr lädt?</a>
+			</h3>
+			<div class="faq-text">
+				Das ist ein Fehler in der Software von "Etherpad Lite" der noch nicht behoben werden konnte. Sollte das Pad nicht mehr laden, kann der Text über den Zusatz "/export/html" am Link exportiert werden (z. B. http://piratenpad.de/p/padname/export/html). Zusätzlich kannst du eine E-Mail an den Support schreiben, die das Pad reparieren können. Das funktioniert nur bei öffentlichen Pads!
+			</div>
 
-<h3>Wie kann ich ein Pad auf meiner Website anzeigen lassen?</h3>
-<p>Mit PHP geht das ganz einfach. Über den Text-Export eines Pads lässt sich dieses leicht in eine Website mit folgendem Code einbinden:<br>
+			<h3 class="faq-headline">
+				<a href=""><span class="arrow right"></span>Wie kann ich ein Pad auf meiner Website anzeigen lassen?</a>
+			</h3>
+			<div class="faq-text">
+				Mit PHP geht das ganz einfach. Über den Text-Export eines Pads lässt sich dieses leicht in eine Website mit folgendem Code einbinden:<br>
 
-<pre>$url = "http://piratenpad.de/ep/pad/export/$PADNAME/latest?format=txt";
-echo file_get_contents($url);</pre></p>
-</div>
+				<pre>$url = "http://piratenpad.de/ep/pad/export/$PADNAME/latest?format=txt";
+				echo file_get_contents($url);</pre>
+			</div>
+		</div>
 
-<a class="scroll-target" name="impressum"></a>
-<div class="centered chapter">
-<h1><i class="icon-wrench"></i> Impressum</h1>
-<h3>Supportanfragen an <a class="support-mail" href="mailto:piratenpad@helpdesk.piratenpartei.de">piratenpad@helpdesk.piratenpartei.de</a></h3>
-<p>
-Dienstanbieter dieser Seite ist die Piratenpartei Deutschland vertreten durch den Vorsitzenden Bernd Schlömer<br>
-</p>
-<p>
-Redaktionell verantwortlich gemäß §5 TMG:<br>
-Bernd Schlömer<br>
-Piratenpartei Deutschland<br>
-Pflugstraße 9a<br>
-10115 Berlin<br>
-Email: bernd.schloemer [at] piratenpartei . de -- (statt "at", bitte "@" eingeben)<br>
-</p>
-Ladungsfähige Anschrift gemäß TMG:<br>
-Piratenpartei Deutschland<br>
-Pflugstraße 9a<br>
-10115 Berlin<br>
-<p>
-Geschäftsstelle<br>
-Piratenpartei Deutschland<br>
-Pflugstraße 9a<br>
-10115 Berlin<br>
-Fon: +49 30 27572040<br>
-Fax: +49 30 609897-517<br>
-E-Mail: bgs_anfragen [at] piratenpartei.de -- (statt "at", bitte "@" eingeben)<br>
-</p>
-<p>
-Haftungshinweis: Im Rahmen unseres Dienstes werden auch Links zu Internetinhalten anderer Anbieter bereitgestellt. Auf den Inhalt dieser Seiten haben wir keinen Einfluss; für den Inhalt ist ausschließlich der Betreiber der anderen Website verantwortlich. Trotz der Überprüfung der Inhalte im gesetzlich gebotenen Rahmen müssen wir daher jede Verantwortung für den Inhalt dieser Links bzw. der verlinkten Seite ablehnen.
-</p>
-</div>
-
-</div>
+		<a class="scroll-target" name="impressum"></a>
+		<div class="centered chapter">
+			<h1><i class="icon-wrench"></i> Impressum</h1>
+			<h3>Supportanfragen an <a class="support-mail" href="mailto:piratenpad@helpdesk.piratenpartei.de">piratenpad@helpdesk.piratenpartei.de</a></h3>
+			<p>
+			Dienstanbieter dieser Seite ist die Piratenpartei Deutschland vertreten durch den Vorsitzenden Bernd Schlömer<br>
+			</p>
+			<p>
+			Redaktionell verantwortlich gemäß §5 TMG:<br>
+			Bernd Schlömer<br>
+			Piratenpartei Deutschland<br>
+			Pflugstraße 9a<br>
+			10115 Berlin<br>
+			Email: bernd.schloemer [at] piratenpartei . de -- (statt "at", bitte "@" eingeben)<br>
+			</p>
+			Ladungsfähige Anschrift gemäß TMG:<br>
+			Piratenpartei Deutschland<br>
+			Pflugstraße 9a<br>
+			10115 Berlin<br>
+			<p>
+			Geschäftsstelle<br>
+			Piratenpartei Deutschland<br>
+			Pflugstraße 9a<br>
+			10115 Berlin<br>
+			Fon: +49 30 27572040<br>
+			Fax: +49 30 609897-517<br>
+			E-Mail: bgs_anfragen [at] piratenpartei.de -- (statt "at", bitte "@" eingeben)<br>
+			</p>
+			<p>
+			Haftungshinweis: Im Rahmen unseres Dienstes werden auch Links zu Internetinhalten anderer Anbieter bereitgestellt. Auf den Inhalt dieser Seiten haben wir keinen Einfluss; für den Inhalt ist ausschließlich der Betreiber der anderen Website verantwortlich. Trotz der Überprüfung der Inhalte im gesetzlich gebotenen Rahmen müssen wir daher jede Verantwortung für den Inhalt dieser Links bzw. der verlinkten Seite ablehnen.
+			</p>
+		</div>
+	</div>
 </div>
 </body>
 </html>
