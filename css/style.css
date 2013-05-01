@@ -20,8 +20,7 @@ a:active {
 	color: #555;
 }
 
-a:hover,
-a:focus {
+a:hover {
 	text-decoration: none;
 	color: #FF8800;
 }
@@ -84,6 +83,14 @@ input.button, button.button {
 	border: 0px none;
 }
 
+input[type=text] {
+	border:1px solid #FF8800;
+}
+
+input[type=text]:focus {
+	border:2px solid #FF8800;
+}
+
 h1,
 h2,
 h3,
@@ -92,7 +99,7 @@ h4 {
 }
 
 .centered {
-	width: 900px;
+	width: 910px;
 	margin: 0 auto;
 }
 
@@ -104,13 +111,13 @@ h4 {
 }
 
 div.logo {
-	background: url("../img/Logo.png") no-repeat scroll 0 0 #fff;
+	background: url("../img/pp_logo.png") no-repeat scroll 0 0 #fff;
     display: block;
     float: left;
-    height: 70px;
+    height: 88px;
+	width: 241px;
     margin-left: 6pt;
     transition: background-color 0.5s linear 0s;
-    width: 177px;
 }
 
 .logo:hover,
@@ -131,9 +138,6 @@ div#header {
   	box-shadow: 0pt 1pt 2pt #777;
 }
 
-div#header div#mobile-nav {
-  display: none; /* see below */
-}
 div#header div#nav {
 	float: right;
   	padding: 0.5pc 0;
@@ -189,24 +193,56 @@ div#button-panel {
 
 /* Mobile view */
 @media screen and (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+
   .centered {
-    margin: 0 20px;
+    width: 100%;
+    margin: 0;
+    margin-left: 10px;
   }
   div#header {
     height: auto;
-    min-height: 150px;
+    min-height: 20px;
   }
-  div#header div.logo,
   div#header div#nav {
-    float: none; /* force movile-nav to get wrapped to a new line*/
+    float: none;
+    padding: 0;
+    line-height: 20px;
+    font-size: 8px;
+    margin-left: 40px;
   }
-  
-  a.scroll-point {
-    top: -80px;
+  div#header div.logo {
+    background: url("../img/flagge.png") no-repeat scroll 0 0 #fff;
+    display: block;
+    height: 58px;
+    width: 58px;
+    margin: 10px 10px;
+    float: left;
   }
-  
+
+  div#header div#nav li a,
+  div#header div#nav li a:active,
+  div#header div#mobile-nav li a,
+  div#header div#mobile-nav li a:active {
+    line-height: 20px;
+  }
+
+  a.scroll-target {
+    top: -80px !important;
+  }
+
   div#content {
-    padding-top: 150px !important;
+    padding-top: 80px !important;
+  }
+
+  .chapter {
+    border-bottom: 1px solid #CCCCCC;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 0px;
   }
 }
+
 

@@ -5,6 +5,7 @@
 <title>Piratenpad</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="favicon.ico" rel="shortcut icon">
 
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 
@@ -23,19 +24,80 @@ $(function() {
   $('a[href=""]').click(function(evt) {
     evt.preventDefault();
   });
-  /*$('li a').click(function(evt) {
-	$('li a').css('background-color', '');
-    $(this).css('background-color', 'green');
-    $(this).toggleClass('');
-  })*/
   $('.faq-headline').click(function(evt) {
-     //$(this).next('p').toggleClass('hidden', 5000);
-     /*$(this).next('.faq-text').toggle('slow', function() {
-       $(this).toggleClass('hidden');
-     });*/
 	 $(this).next('.faq-text').slideToggle("slow");
   });
+  $('#randomPad').click(function(evt) {
+    if ($(this).is(':checked')) {
+	  //$("#customPadUrl").attr("disabled", "disabled");
+	  $("#customPadUrl").val("");
+	} else {
+	  //$("#customPadUrl").removeAttr("disabled");
+	}
+  });
+  $("#customPadUrl").keyup(function(evt) {
+	if ($(this).val() == "") {
+	  $('#randomPad').prop("checked", true);
+	} else {
+	  $('#randomPad').removeAttr("checked");
+	}
+  });
 })
+
+/******************************************************************************
+ * The following code comes from Etherpad-Lite with the following license:
+ *
+ * Copyright 2011 Peter Martischka, Primary Technology.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. 
+ */
+function randomPadName()
+{
+	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	var string_length = 10;
+	var randomstring = '';
+	for (var i = 0; i < string_length; i++)
+	{
+		var rnum = Math.floor(Math.random() * chars.length);
+		randomstring += chars.substring(rnum, rnum + 1);
+	}
+	return randomstring;
+}
+/******************************************************************************/
+
+function openPadUrl()
+{
+	var customPadName = $('#customPadUrl').val();
+	var customPadUrl = "";
+	if (customPadName == "") {
+		customPadUrl = "ep/pad/newpad";
+	} else {
+		customPadUrl = customPadName;
+	}
+	loadPadUrl(customPadUrl);
+}
+
+function openLitePadUrl()
+{
+	var customPadName = $('#customPadUrl').val();
+	if (customPadName == "") {
+		loadPadUrl("p/" + randomPadName());
+	} else {
+		loadPadUrl("p/" + customPadName);
+	}
+}
+
+function loadPadUrl(url)
+{
+	window.location = "//piratenpad.de/" + url;
+}
 
 </script>
 </head>
@@ -48,6 +110,7 @@ $(function() {
 		    	<ul>
 		      		<li><a href="#home">Home</a></li>
 		      		<li><a href="#faq">FAQ</a></li>
+					<li><a href="#tou">Nutzungsbedingungen</a></li>
 		      		<li><a href="#impressum">Impressum</a></li>
 		   		</ul>
 		  	</div>
@@ -65,14 +128,23 @@ $(function() {
 	<div id="content">
 		<a class="scroll-target" name="home"></a>
 		<div class="centered chapter">
-			<h1 style="">Home</h1>
-				<p>Etherpad ist eine Software, um Text via Browser gemeinsam zu bearbeiten. Etherpad arbeitet live. Das heißt, jeder kann sofort die Änderungen des anderen am Text sehen.</p>
-				<p>Anleitung: <a href="#">PDF</a> (<a href="http://wiki.piratenpartei.de/Piratenpad/Handbuch" target="_blank">Wiki</a>)</p><br>
+			<h1>Home</h1>
+				<p>Das Piratenpad ist ein Dienst der Piratenpartei Deutschland und basiert auf der Software Etherpad.<br>
+				Etherpad ist eine Software, um Text via Browser gemeinsam zu bearbeiten. Etherpad arbeitet live. Das heißt, jeder kann sofort die Änderungen des anderen am Text sehen.</p>
+				<p>Anleitung: <a href="Piratenpad_Anleitung_1_0.pdf" target="_blank"><b>PDF</b></a> (<a href="http://wiki.piratenpartei.de/Piratenpad/Handbuch" target="_blank"><b>Wiki</b></a>)</p><br>
 				<div id="button-panel">
-					<a href="#" onclick="">
+					Padname:<br>
+					<input id="randomPad" type="checkbox" checked="checked" />zufällig<br>
+					<input id="customPadUrl" type="text" placeholder="zufälliger Padname" /><br>
+					<a href="#" onclick="openPadUrl()">
 						<div class="button">Neues Pad</div>
 					</a>
-					<a href="#" onclick="">
+					<a href="#" onclick="openLitePadUrl()">
+						<div class="button">Neues Lite-Pad</div>
+					</a>
+					<br>
+					<br>
+					<a href="https://piratenpad.de/ep/pro-signup/">
 						<div class="button">Neues Team</div>
 					</a>
 				</div>
@@ -127,21 +199,36 @@ $(function() {
 			<div class="faq-text">
 				Das ist ein Fehler in der Software von "Etherpad Lite" der noch nicht behoben werden konnte. Sollte das Pad nicht mehr laden, kann der Text über den Zusatz "/export/html" am Link exportiert werden (z. B. http://piratenpad.de/p/padname/export/html). Zusätzlich kannst du eine E-Mail an den Support schreiben, die das Pad reparieren können. Das funktioniert nur bei öffentlichen Pads!
 			</div>
+		</div>
+		
+		<a class="scroll-target" name="tou"></a>
+		<div class="centered chapter">
+			<h1>Nutzungsbedingungen</h1>
 
-			<h3 class="faq-headline">
-				<a href=""><span class="arrow right"></span>Wie kann ich ein Pad auf meiner Website anzeigen lassen?</a>
-			</h3>
-			<div class="faq-text">
-				Mit PHP geht das ganz einfach. Über den Text-Export eines Pads lässt sich dieses leicht in eine Website mit folgendem Code einbinden:<br>
+			<b>Nutzung</b>
+			<p>Der Dienst wird von der Piratenpartei Deutschland betrieben, verantwortlich für die Administration ist die Bundes-IT. Für eventuelle Verluste von Daten übernehmen wir keine Haftung. Die Nutzung dieses Dienstes erfolgt auf eigenes Risiko. Die Piratenpartei Deutschland garantiert nicht für die Verfügbarkeit des Dienstes.</p>
 
-				<pre>$url = "http://piratenpad.de/ep/pad/export/$PADNAME/latest?format=txt";
-				echo file_get_contents($url);</pre>
-			</div>
+			<b>Datenschutz</b>
+			<p>Wir speichern keine IP-Adressen.<br>
+			Die angegebenen Daten (E-Mail Adresse, Name) werden nicht an Dritte weitergegeben.</p>
+
+			<b>Cookies</b>
+			<p>Um einen Nutzer auf einem Pad beim erneuten Besuch wieder zu erkennen und um Einstellungen (Sprache, Pad-Darstellung, etc.) zu speichern, werden Cookies auf dem jeweiligen Gerät gespeichert.</p>
+
+			<b>Rechte</b>
+			<p>Die Rechte an den Texten bleiben beim jeweiligen Autor. Für die Inhalte der Pads sind die jeweiligen Autoren verantwortlich. Wir distanzieren uns hiermit von diesen Inhalten und schließen eine Haftung dafür aus.<br>
+			Wir behalten uns das Recht vor, Pads zu entfernen, falls rechtswidrige Inhalte darauf publiziert werden. Ferner werden wir die publizierten Inhalte nicht weitergeben oder einer anderweitigen Nutzung zuführen, es sei denn, wir sind durch gesetzliche Bestimmungen dazu verpflichtet. In diesem Fall werden wir, soweit es uns möglich ist, die Betroffenen unterrichten.</p>
+
+			<b>Löschung von Pads und Chateinträgen</b>
+			<p>Öffentliche Pads (Pads unter der URL: http(s)://piratenpad.de/) können NICHT selbstständig gelöscht werden. Wir behalten uns vor, inaktive Pads nach einer gewissen Zeit zu löschen. Aktuell ist vorgesehen, bei öffentlichen Pads, welche 90 Tage lang nicht aufgerufen wurden, die letzte Version zu archivieren und nach Nachweis des berechtigten Interesses dem/den Autor/en zur Verfügung zu stellen. Das ursprüngliche Pad wird vom Server gelöscht. Da auch bei sorgfältigen Umgang mit den Daten nicht ausgeschlossen werden kann, dass ein Pad nicht mehr zur Verfügung steht, wird dem Nutzer nachdrücklich empfohlen, selbst eine Datensicherung seines/r Pad/s zu bewirken.</p>
+
+			<b>Löschung von Teams</b>
+			<p>Teampads und die dazugehörigen Benutzerkonten und -daten werden nach einer Frist von 90 Tagen vollständiger Inaktivität nicht gelöscht, sondern lediglich gesperrt. Wir behalten uns vor, inaktive Teampads und die dazugehörigen Benutzerkonten und -daten nach einer gewissen Zeit zu löschen. Aktuell ist vorgesehen, Teampads, welche 180 Tage lang nicht aufgerufen wurden, in der letzten Version zu archivieren und nach Nachweis des berechtigten Interesses dem/den Autor/en zur Verfügung zu stellen. Da auch bei sorgfältigem Umgang mit den Daten nicht ausgeschlossen werden kann, dass ein Pad nicht mehr zur Verfügung steht, wird dem Nutzer nachdrücklich empfohlen, selbst eine Datensicherung seines/r Pad/s zu bewirken.</p>
 		</div>
 
 		<a class="scroll-target" name="impressum"></a>
 		<div class="centered chapter">
-			<h1><i class="icon-wrench"></i> Impressum</h1>
+			<h1>Impressum</h1>
 			<h3>Supportanfragen an <a class="support-mail" href="mailto:piratenpad@helpdesk.piratenpartei.de">piratenpad@helpdesk.piratenpartei.de</a></h3>
 			<p>
 			Dienstanbieter dieser Seite ist die Piratenpartei Deutschland vertreten durch den Vorsitzenden Bernd Schlömer<br>
