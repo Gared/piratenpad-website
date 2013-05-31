@@ -138,6 +138,10 @@ div#header {
   	box-shadow: 0pt 1pt 2pt #777;
 }
 
+div#header div#mobile-nav {
+  display: none; /* see below */
+}
+
 div#header div#nav {
 	float: right;
   	padding: 0.5pc 0;
