@@ -53,7 +53,7 @@ $(function() {
 
 function openPadUrl()
 {
-	var customPadName = $('#customPadUrl').val();
+	var customPadName = replaceSpecialChars($('#customPadUrl').val());
 	var customPadUrl = "";
 	if (customPadName == "") {
 		customPadUrl = "ep/pad/newpad";
@@ -65,7 +65,7 @@ function openPadUrl()
 
 function openLitePadUrl()
 {
-	var customPadName = $('#customPadUrl').val();
+	var customPadName = replaceSpecialChars($('#customPadUrl').val());
 	if (customPadName == "") {
 		loadPadUrl("randomPad");
 	} else {
@@ -76,6 +76,10 @@ function openLitePadUrl()
 function loadPadUrl(url)
 {
 	window.location = "//piratenpad.de/" + url;
+}
+
+function replaceSpecialChars(text) {
+    return text.replace(/ /g, "_");
 }
 
 $(function() {
