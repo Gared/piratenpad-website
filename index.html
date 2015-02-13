@@ -51,7 +51,7 @@ $(function() {
   });
 })
 
-function openPadUrl()
+/*function openPadUrl()
 {
 	var customPadName = replaceSpecialChars($('#customPadUrl').val());
 	var customPadUrl = "";
@@ -61,7 +61,7 @@ function openPadUrl()
 		customPadUrl = customPadName;
 	}
 	loadPadUrl(customPadUrl);
-}
+}*/
 
 function openLitePadUrl()
 {
@@ -97,7 +97,11 @@ $(function() {
         ['2014-05-15', 420358],
         ['2014-06-13', 429128],
         ['2014-07-14', 437507],
-        ['2014-08-23', 446433]
+        ['2014-08-23', 446433],
+        ['2014-10-22', 460680],
+        ['2014-11-14', 466965],
+        ['2014-12-16', 476324],
+        ['2015-02-01', 486741]
     ];
 	var teamPadsCount = [
         ['2013-05-30', 138621],
@@ -113,7 +117,11 @@ $(function() {
         ['2014-05-15', 193729],
         ['2014-06-13', 197569],
         ['2014-07-14', 201195],
-        ['2014-08-23', 205623]
+        ['2014-08-23', 205623],
+        ['2014-10-22', 212490],
+        ['2014-11-14', 215319],
+        ['2014-12-16', 219056],
+        ['2015-02-01', 223512]
     ];
 	var publicPadsCount = [
         ['2013-05-30', 169739],
@@ -129,7 +137,11 @@ $(function() {
         ['2014-05-15', 226629],
         ['2014-06-13', 231559],
         ['2014-07-14', 236312],
-        ['2014-08-23', 240810]
+        ['2014-08-23', 240810],
+        ['2014-10-22', 248190],
+        ['2014-11-14', 251646],
+        ['2014-12-16', 257268],
+        ['2015-02-01', 263229]
     ];
 	var proAccountsCount = [
         ['2013-05-30', 42863],
@@ -145,7 +157,11 @@ $(function() {
         ['2014-05-15', 63006],
         ['2014-06-13', 64103],
         ['2014-07-14', 65325],
-        ['2014-08-23', 66418]
+        ['2014-08-23', 66418],
+        ['2014-10-22', 68195],
+        ['2014-11-14', 69065],
+        ['2014-12-16', 70218],
+        ['2015-02-01', 71344]
     ];
 	var proDomainsCount = [
         ['2013-05-30', 10586],
@@ -161,7 +177,11 @@ $(function() {
         ['2014-05-15', 13297],
         ['2014-06-13', 13549],
         ['2014-07-14', 13792],
-        ['2014-08-23', 14041]
+        ['2014-08-23', 14041],
+        ['2014-10-22', 14470],
+        ['2014-11-14', 14689],
+        ['2014-12-16', 14955],
+        ['2015-02-01', 15225]
     ];
 	var plot1 = $.jqplot ('stats', [allPadsCount, teamPadsCount, publicPadsCount, proAccountsCount, proDomainsCount],
 	{
@@ -234,11 +254,8 @@ $(function() {
 				Padname:<br>
 				<input id="randomPad" type="checkbox" checked="checked" />zufällig<br>
 				<input id="customPadUrl" type="text" placeholder="zufälliger Padname" /><br>
-				<a href="#" onclick="openPadUrl()">
-					<div class="button">Neues Pad</div>
-				</a>
 				<a href="#" onclick="openLitePadUrl()">
-					<div class="button">Neues Lite-Pad</div>
+					<div class="button">Neues Pad</div>
 				</a>
 				<br>
 				<br>
